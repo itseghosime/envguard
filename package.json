@@ -10,6 +10,7 @@
   "scripts": {
     "dev": "tsx src/index.ts",
     "build": "tsup src/index.ts --format esm --platform node --target node20 --out-dir dist --clean",
+    "pretest": "npm run build",
     "start": "node dist/index.js",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
@@ -24,7 +25,15 @@
     "typescript",
     "validation"
   ],
-  "author": "",
+  "author": "Itseghosime",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itseghosime/envguard.git"
+  },
+  "bugs": {
+    "url": "https://github.com/itseghosime/envguard/issues"
+  },
+  "homepage": "https://github.com/itseghosime/envguard#readme",
   "license": "MIT",
   "engines": {
     "node": ">=20"
