@@ -147,4 +147,27 @@ VALID_KEY=safe
     expect(JSON.stringify(result)).not.toContain("super_secret_value");
     expect(JSON.stringify(result)).not.toContain("another_secret");
   });
+
+  it("handles CRLF Windows line endings seamlessly", () => {
+    const content = "PORT=3000\r\nDATABASE_URL=postgres://...\r\nAPI_KEY=test\r\n";
+    const result = parseEnv(content);
+    expect(result.names).toEqual(["PORT", "DATABASE_URL", "API_KEY"]);
+    expect(result.diagnostics).toEqual([]);
+  });
+
+  it("handles quoted values and values without trailing newline", () => {
+    const content = 'NAME="EnvGuard CLI"\nDESCRIPTION=\'A lightweight validator\'\nUNQUOTED=plain';
+    const result = parseEnv(content);
+    expect(result.names).toEqual(["NAME", "DESCRIPTION", "UNQUOTED"]);
+    expect(result.variables.every((v) => v.hasValue)).toBe(true);
+    expect(result.diagnostics).toEqual([]);
+  });
+
+  it("handles unicode and unusual characters in values without affecting key extraction", () => {
+    const content = "UNICODE_KEY=hello_🚀_world\nI18N_MSG=こんにちは\nACCENT=café";
+    const result = parseEnv(content);
+    expect(result.names).toEqual(["UNICODE_KEY", "I18N_MSG", "ACCENT"]);
+    expect(result.diagnostics).toEqual([]);
+  });
 });
+

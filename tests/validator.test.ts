@@ -105,4 +105,18 @@ describe("validateEnv", () => {
     expect(result.missing).toEqual(["UNIQUE"]);
     expect(result.passed).toBe(1);
   });
+
+  it("passes when target .env contains extra variables not listed in .env.example", () => {
+    const expected = parseEnv("PORT=3000\nDATABASE_URL=");
+    const actual = parseEnv("PORT=3000\nDATABASE_URL=postgres://...\nEXTRA_SECRET=foo\nANOTHER_EXTRA=bar");
+
+    const result = validateEnv(expected, actual);
+
+    expect(result.isValid).toBe(true);
+    expect(result.missing).toEqual([]);
+    expect(result.passed).toBe(2);
+    expect(result.actual).toContain("EXTRA_SECRET");
+    expect(result.actual).toContain("ANOTHER_EXTRA");
+  });
 });
+
