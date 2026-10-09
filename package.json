@@ -11,7 +11,11 @@
     "dev": "tsx src/index.ts",
     "build": "tsup src/index.ts --format esm --platform node --target node20 --out-dir dist --clean",
     "start": "node dist/index.js",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "check": "npm run typecheck && npm run test"
   },
   "keywords": [
     "env",
@@ -34,8 +38,10 @@
   },
   "devDependencies": {
     "@types/node": "^26.6.4",
+    "@vitest/coverage-v8": "^5.0.3",
     "tsup": "^8.5.1",
     "tsx": "^4.23.15",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.3"
   }
 }
