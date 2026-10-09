@@ -1,11 +1,14 @@
 {
-  "name": "envguard",
+  "name": "@itseghosime/envguard",
   "version": "0.1.0",
   "description": "A lightweight CLI for validating environment variable configuration.",
   "type": "module",
   "main": "./dist/index.js",
   "bin": {
     "envguard": "dist/index.js"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "dev": "tsx src/index.ts",
