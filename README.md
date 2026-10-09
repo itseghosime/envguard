@@ -19,31 +19,30 @@ EnvGuard ensures your target `.env` file defines all required variable names bef
 
 ## Installation
 
-### Run directly with `npx` (No installation needed)
+### From Source (Current)
+
+Clone the repository and install dependencies:
 
 ```bash
+git clone https://github.com/itseghosime/envguard.git
+cd envguard
+npm ci
+npm run build
+npm link
+```
+
+### After npm Publication
+
+Once published to the npm registry, EnvGuard will be available via:
+
+```bash
+# Direct execution with npx
 npx envguard check
-```
 
-### Local Project Dependency
-
-```bash
+# Local project dependency
 npm install -D envguard
-```
 
-Add a check script to your `package.json`:
-
-```json
-{
-  "scripts": {
-    "env:check": "envguard check"
-  }
-}
-```
-
-### Global Installation
-
-```bash
+# Global installation
 npm install -g envguard
 ```
 
