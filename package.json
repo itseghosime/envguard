@@ -1,0 +1,41 @@
+{
+  "name": "envguard",
+  "version": "0.1.0",
+  "description": "A lightweight CLI for validating environment variable configuration.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "bin": {
+    "envguard": "./dist/index.js"
+  },
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "build": "tsup src/index.ts --format esm --platform node --target node20 --out-dir dist --clean",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "env",
+    "environment-variables",
+    "cli",
+    "typescript",
+    "validation"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "boxen": "^9.0.0",
+    "chalk": "^6.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.4",
+    "tsup": "^8.5.1",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}
