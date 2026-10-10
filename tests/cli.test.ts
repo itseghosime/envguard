@@ -217,10 +217,12 @@ describe("CLI Integration Tests", () => {
     });
 
     it("executes '--help' and prints usage guide", () => {
+      const pkgVersion = getPackageVersion();
       const output = execFileSync("node", [CLI_PATH, "--help"], {
         encoding: "utf8",
         env: { ...process.env, NO_COLOR: "1" },
       });
+      expect(output).toContain(`◆ ENVGUARD v${pkgVersion}`);
       expect(output).toContain("Usage");
       expect(output).toContain("envguard <command>");
     });
