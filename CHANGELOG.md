@@ -1,8 +1,7 @@
-## [0.1.1] - 2026-10-10
+## [0.1.2] - 2026-10-10
 
-### Documentation
+### Fixed
 
-- Corrected npm installation commands to use `@itseghosime/envguard`.
-- Added troubleshooting for old `npm link` installations.
-- Clarified `.env.local` and other environment file limitations.
-- Updated installation, usage, and contribution instructions.
+- Fixed incorrect CLI version reporting after package updates.
+- Synchronized CLI version output with package metadata.
+- Prevented version mismatches from breaking CLI integration tests.
