@@ -10,7 +10,42 @@ import {
   renderUnknownCommand,
 } from "../utils/reporter.js";
 
-export const VERSION = "0.1.0";
+import { fileURLToPath } from "node:url";
+import { dirname } from "node:path";
+
+declare const __CLI_VERSION__: string | undefined;
+
+export function getCliVersion(): string {
+  if (typeof __CLI_VERSION__ !== "undefined") {
+    return __CLI_VERSION__;
+  }
+
+  try {
+    let currentDir = dirname(fileURLToPath(import.meta.url));
+    while (true) {
+      try {
+        const pkgPath = resolve(currentDir, "package.json");
+        const pkg = JSON.parse(readFileSync(pkgPath, "utf8")) as { version?: unknown };
+        if (typeof pkg.version === "string") {
+          return pkg.version;
+        }
+      } catch {
+        // Continue searching upwards
+      }
+      const parentDir = resolve(currentDir, "..");
+      if (parentDir === currentDir) {
+        break;
+      }
+      currentDir = parentDir;
+    }
+  } catch {
+    // Fallback if filesystem or URL resolution fails
+  }
+
+  return "0.0.0";
+}
+
+export const VERSION = getCliVersion();
 
 export interface CommandOptions {
   cwd?: string;
